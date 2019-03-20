@@ -1,6 +1,7 @@
 import { Componente } from '../interfaces/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,9 @@ export class DataService {
   }
 
   getHeroes() {
-    return this.http.get('/assets/data/superheroes.json');
+    return this.http.get('/assets/data/superheroes.json').pipe(
+      // Retrasamos un poco el resultado para poder ver el skeleton aparecer
+      delay(1500)
+    );
   }
 }
